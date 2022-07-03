@@ -1,10 +1,10 @@
-import {getUniqueListByKey} from "../../../../helpers/getUniqueListByKey";
-import {arrayMove} from "../../../../helpers/arrayMove";
+import {uniqBy} from "../../../helpers/uniqBy";
+import {arrayMove} from "../../../helpers/arrayMove";
 
 export const trackReducers = {
     setTracks: (state, action) => {
         // Remove duplicates from API response
-        state.list = getUniqueListByKey(action.payload, 'Track URI')
+        state.list = uniqBy(action.payload, 'Track URI')
     },
 
     updateTrackOrder: (state, action) => {
