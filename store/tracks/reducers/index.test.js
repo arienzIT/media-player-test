@@ -1,7 +1,6 @@
 import {uniqBy} from "../../../helpers/uniqBy";
 import {arrayMove} from "../../../helpers/arrayMove";
 import {trackReducers} from "./index";
-import {tracksSlice} from "../index";
 
 jest.mock('../../../helpers/uniqBy', () => ({
     uniqBy: jest.fn()
@@ -23,14 +22,16 @@ describe('tracks reducers', () => {
     describe('setTracks', () => {
         it('sets list', () => {
             // Arrange.
-            const payload = ['track']
+            const payload = [{ ['Track URI']: 'track-id' }]
             uniqBy.mockReturnValue(payload)
 
             // Act.
             trackReducers.setTracks(state, { payload })
 
             // Assert.
-            expect(state.list).toStrictEqual(payload)
+            expect(state.list).toStrictEqual([
+                expect.objectContaining({ id: 'track-id' })
+            ])
         })
     })
 

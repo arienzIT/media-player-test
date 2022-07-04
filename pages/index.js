@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import axios from 'axios'
-import {useCallback, useEffect} from "react";
+import {useEffect} from "react";
 import {useDispatch} from "react-redux";
-import {setTracks, updateTrackOrder} from "../store/tracks";
+import {setTracks} from "../store/tracks";
 import {TrackList} from "../components/tracks/List";
 import {TrackFooter} from "../components/tracks/Footer";
 
@@ -11,10 +11,6 @@ export default function Home(props) {
 
   useEffect(() => {
     dispatch(setTracks(props.tracks))
-  }, [])
-
-  const onSortEnd = useCallback((oldIndex, newIndex) => {
-    dispatch(updateTrackOrder({oldIndex, newIndex}))
   }, [])
 
   return (
