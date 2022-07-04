@@ -1,19 +1,22 @@
 import {TrashIcon} from "@heroicons/react/outline";
 import {useDispatch} from "react-redux";
 import PropTypes from "prop-types";
-import { TrackPlayerButtons } from "../PlayerButtons";
-import {removeTrack} from "../../../store/tracks";
+import {TrackPlayerButtons} from "../PlayerButtons";
+import {removeTrack} from "../../../store/tracks/reducers";
 
-export const TrackListItem = ({ track }) => {
+export const TrackListItem = ({track}) => {
     const dispatch = useDispatch()
 
     return (
         <li className="flex flex-1 flex-col text-center bg-white rounded-lg shadow">
             <div className="flex-1 flex flex-col p-8 relative">
-                <TrashIcon
-                    className="w-6 h-6 absolute right-4 top-4 text-gray-400 cursor-pointer"
-                    onClick={() => dispatch(removeTrack(track.id))}
-                />
+                <button data-testid="delete-button">
+                    <TrashIcon
+                        className="w-6 h-6 absolute right-4 top-4 text-gray-400"
+                        onClick={() => dispatch(removeTrack(track.id))}
+                    />
+                    <span className="sr-only">Delete</span>
+                </button>
                 <img className="w-24 h-24 flex-shrink-0 mx-auto rounded-full" src={track.albumCoverImage}
                      alt={track.albumTitle}/>
                 <h3 className="mt-6 text-gray-900 text-sm font-medium">{track.title}</h3>

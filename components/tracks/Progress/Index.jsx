@@ -27,6 +27,7 @@ export const TrackProgress = () => {
             <div className="absolute left-0 rounded-lg bg-indigo-500 w-full h-2 transition-all duration-1000 ease-linear"
                  style={{ width: `${progress}%` }}
             />
+            <span className="sr-only">{progress}% played</span>
         </div>
     )
 }
