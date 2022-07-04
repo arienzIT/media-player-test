@@ -1,10 +1,13 @@
 import {uniqBy} from "../../../helpers/uniqBy";
 import {arrayMove} from "../../../helpers/arrayMove";
+import {TrackMapper} from "../../../mappers/track";
 
 export const trackReducers = {
     setTracks: (state, action) => {
         // Remove duplicates from API response
-        state.list = uniqBy(action.payload, 'Track URI')
+        const uniqueTracks = uniqBy(action.payload, 'Track URI')
+
+        state.list = uniqueTracks.map(TrackMapper.fromResponseToObject)
     },
 
     updateTrackOrder: (state, action) => {

@@ -1,6 +1,4 @@
 export const arrayMove = (array, fromIndex, toIndex) => {
-    array = [...array];
-
     const startIndex = fromIndex < 0 ? array.length + fromIndex : fromIndex;
 
     if (startIndex >= 0 && startIndex < array.length) {
