@@ -11,6 +11,7 @@ describe('TrackProgress', () => {
     })
 
     afterAll(() => {
+        jest.runOnlyPendingTimers()
         jest.useRealTimers()
     })
 
@@ -30,7 +31,7 @@ describe('TrackProgress', () => {
             },
             preloadedState: {
                 tracks: {
-                    list: [ track ],
+                    list: [track],
                     activeId: 'track-id'
                 }
             }
@@ -38,7 +39,7 @@ describe('TrackProgress', () => {
 
         render(
             <Provider store={store}>
-                <TrackProgress />
+                <TrackProgress/>
             </Provider>
         )
 
@@ -49,6 +50,52 @@ describe('TrackProgress', () => {
 
         // Assert.
         expect(screen.getByText('10% played')).toBeInTheDocument()
+    })
 
+    it('plays next track after finishing', () => {
+        // Arrange.
+        const tracks = [
+            {
+                id: 'track-id',
+                title: 'Track title',
+                albumTitle: 'Album title',
+                albumCoverImage: 'album-cover-image-url',
+                authors: 'Author 1, Author 2',
+                duration: 1
+            },
+            {
+                id: 'track-id-2',
+                title: 'Track title 2',
+                albumTitle: 'Album title 2',
+                albumCoverImage: 'album-cover-image-2-url',
+                authors: 'Author 1, Author 2',
+                duration: 2
+            }
+        ]
+        const store = configureStore({
+            reducer: {
+                tracks: tracksSlice
+            },
+            preloadedState: {
+                tracks: {
+                    list: tracks,
+                    activeId: 'track-id'
+                }
+            }
+        })
+
+        render(
+            <Provider store={store}>
+                <TrackProgress/>
+            </Provider>
+        )
+
+        // Act.
+        act(() => {
+            jest.runOnlyPendingTimers()
+        })
+
+        // Assert.
+        expect(screen.getByText('0% played')).toBeInTheDocument()
     })
 })

@@ -1,8 +1,10 @@
 import {useEffect, useMemo, useState} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {activeTrack} from "../../../store/tracks/selectors";
+import {playNextTrack} from "../../../store/tracks";
 
 export const TrackProgress = () => {
+    const dispatch = useDispatch()
     const track = useSelector((state) => activeTrack(state))
     const [count, setCount] = useState(0)
 
@@ -21,6 +23,13 @@ export const TrackProgress = () => {
     const progress = useMemo(() => {
         return 100 * count / track.duration
     }, [count, track])
+
+    // play next track when current finishes
+    useEffect(() => {
+        if (progress >= 100) {
+            dispatch(playNextTrack())
+        }
+    }, [progress])
 
     return (
         <div className="w-full h-2 rounded-lg bg-gray-300 relative w-full">
