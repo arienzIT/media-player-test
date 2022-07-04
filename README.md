@@ -49,8 +49,8 @@ For the sake of the test I did omit to implement some improvements/optimizations
 - [] Implement *virtual scrolling* for track list. Needs to verify if intersection observer works with [react-easy-sort](https://github.com/ValentinH/react-easy-sort).
 - [] Abstract `components/tracks/Footer` in order to make it reusable from other pages
 - [] Add [next-connect-redux](https://github.com/huzidaha/next-connect-redux) to keep the application state while navigating through SSR pages
-- [] Show/Hide `TrackFooter` dynamically based on state `activeId`: it would be nice to animate it in/out from the bottom
-- [] Add validation to `playNextTrack` and `playPreviousTrack` in order to disable the arrows for the last and first `TrackListItem` respectively
-- [] Play next track when track finishes (Use `tracks/Progress` component to dispatch the event)
+- [x] ~~Show/Hide `TrackFooter` dynamically based on state `activeId`: it would be nice to animate it in/out from the bottom~~
+- [x] ~~Add validation to `playNextTrack` and `playPreviousTrack` in order to disable the arrows for the last and first `TrackListItem` respectively~~
+- [x] ~~Play next track when track finishes (Use `tracks/Progress` component to dispatch the event)~~
 
 
