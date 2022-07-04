@@ -28,11 +28,25 @@ export const trackReducers = {
 
     playNextTrack: (state) => {
         const activeTrackIndex = state.list.findIndex((track) => state.activeId === track.id)
+
+        // If last track, play first song
+        if (activeTrackIndex === state.list.length - 1) {
+            state.activeId = state.list[0].id
+            return
+        }
+
         state.activeId = state.list[activeTrackIndex + 1].id
     },
 
     playPreviousTrack: (state) => {
         const activeTrackIndex = state.list.findIndex((track) => state.activeId === track.id)
+
+        // If first track, play last song
+        if (!activeTrackIndex) {
+            state.activeId = state.list[state.list.length - 1].id
+            return
+        }
+
         state.activeId = state.list[activeTrackIndex - 1].id
     }
 }

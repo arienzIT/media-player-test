@@ -117,6 +117,23 @@ describe('tracks reducers', () => {
             // Assert.
             expect(state.activeId).toStrictEqual('track-id-2')
         })
+
+        it('is last track > plays first track', () => {
+            // Arrange.
+            state = {
+                activeId: 'track-id-2',
+                list: [
+                    { id: 'track-id-1' },
+                    { id: 'track-id-2' },
+                ]
+            }
+
+            // Act.
+            trackReducers.playNextTrack(state)
+
+            // Assert.
+            expect(state.activeId).toStrictEqual('track-id-1')
+        })
     })
 
     describe('playPreviousTrack', () => {
@@ -135,6 +152,23 @@ describe('tracks reducers', () => {
 
             // Assert.
             expect(state.activeId).toStrictEqual('track-id-1')
+        })
+
+        it('is first track > plays last track', () => {
+            // Arrange.
+            state = {
+                activeId: 'track-id-1',
+                list: [
+                    { id: 'track-id-1' },
+                    { id: 'track-id-2' },
+                ]
+            }
+
+            // Act.
+            trackReducers.playPreviousTrack(state)
+
+            // Assert.
+            expect(state.activeId).toStrictEqual('track-id-2')
         })
     })
 })
