@@ -2,7 +2,7 @@ import {TrashIcon} from "@heroicons/react/outline";
 import {useDispatch} from "react-redux";
 import PropTypes from "prop-types";
 import {TrackPlayerButtons} from "../PlayerButtons";
-import {removeTrack} from "../../../store/tracks/reducers";
+import {removeTrack} from "../../../store/tracks";
 
 export const TrackListItem = ({track}) => {
     const dispatch = useDispatch()
